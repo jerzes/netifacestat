@@ -1,6 +1,7 @@
 import sys
 import getopt
 import time
+from si_prefix import si_format
 
 arg = argv = sys.argv[1:] 
 iface = None
@@ -37,8 +38,8 @@ while True:
                 itx = i.split()
                 stop_rx = itx[1]
                 stop_tx = itx[9]       
-    delta_rx = int(stop_rx) - int(start_rx)
-    delta_tx = int(stop_tx) - int(start_tx)
-    sys.stdout.write("RX: " + str(delta_rx) + " bytes/s  TX: " + str(delta_tx) + "  bytes/s               \r")
+    delta_rx = si_format(int(stop_rx) - int(start_rx), precision=2)
+    delta_tx = si_format(int(stop_tx) - int(start_tx), precision=2)
+    sys.stdout.write("RX: " + str(delta_rx) + "B/s  TX: " + str(delta_tx) + "B/s               \r")
     sys.stdout.flush()
 
